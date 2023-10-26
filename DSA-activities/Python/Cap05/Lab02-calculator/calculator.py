@@ -9,8 +9,13 @@ def clean_screen():
         _ = system('clear')
 
 def inputNumbers():
-    n1 = float(input('\nInforme o primeiro número: '))
-    n2 = float(input('\nInforme o segundo número: '))
+    while(True):
+        try:
+            n1 = float(input('\nInput the first number: '))
+            n2 = float(input('\nInput the second number: '))
+            break
+        except ValueError:
+            print('\n>>>>> You didn\'t put a number. Try again! <<<<<\n')
     return n1,n2
 
 def soma():
@@ -27,25 +32,35 @@ def multiplicacao():
 
 def divisao():
     x,y = inputNumbers()
-    if y != 0:
-        print(f'\n{x} ÷ {y} = {round(float(x)/y, 2)}\n\n') 
-    else:
-        print(f'\n{x} ÷ {y} = X (it\'s not possible :)')
+    while(True):
+        try:
+            print(f'\n{x} ÷ {y} = {round(float(x)/y, 2)}\n\n')
+            break
+        except ZeroDivisionError:
+            print(f'\n{x} ÷ {y} = X (it\'s not possible to divide by zero :)\n')
+            break
 
 def calculator():
     clean_screen()
     print(constant.WELCOME_TEXT)
     print(constant.INITIAL_TEXT)
-    option = int(input('Informe a sua opção: '))
+
+    while(True):
+        try:
+            option = int(input('Input your option: '))
+            break
+        except ValueError:
+            print('\n>>>>> You didn\'t put a number. Try again! <<<<<\n')
 
     if option < 0 or option > 4:
         while(True):
-            print('\n>>>>> Opção inválida! <<<<<\n')
-            option = int(input('Informe a sua opção corretamente: '))
+            print('\n>>>>> Invalid option! <<<<<\n')
+            option = int(input('Input your correct option: '))
             if option >= 0 and option <= 4:
                 break
     
     if option == 0:
+        print('\nBye bye\n')
         exit
     elif option == 1:
         soma()
